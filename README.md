@@ -1,6 +1,6 @@
-# This is a plugin for Automate-Everything. It provides scene objects that helps share behaviors/automations across objects.
+# Welcome
 
-This is a plugin for [Automate-Everything](https://github.com/tomaszbabiuk/automate-everything)
+This is a plugin for [Automate-Everything](https://github.com/tomaszbabiuk/automate-everything). It provides scene objects that helps share behaviors/automations across objects.
 
 # Directory setup
 ```bash
