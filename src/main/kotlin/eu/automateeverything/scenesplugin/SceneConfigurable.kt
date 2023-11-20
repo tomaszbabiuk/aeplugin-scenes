@@ -24,19 +24,18 @@ import eu.automateeverything.domain.configurable.Configurable
 import eu.automateeverything.domain.configurable.FieldDefinition
 import eu.automateeverything.domain.configurable.StateDeviceConfigurable
 import eu.automateeverything.domain.events.EventBus
-import org.pf4j.Extension
 import java.util.HashMap
+import org.pf4j.Extension
 
 @Extension
-class SceneConfigurable(
-    private val eventBus: EventBus
-) : StateDeviceConfigurable() {
+class SceneConfigurable(private val eventBus: EventBus) : StateDeviceConfigurable() {
     override val parent: Class<out Configurable>?
         get() = null
 
     override val fieldDefinitions: Map<String, FieldDefinition<*>>
         get() {
-            val result: LinkedHashMap<String, FieldDefinition<*>> = LinkedHashMap(super.fieldDefinitions)
+            val result: LinkedHashMap<String, FieldDefinition<*>> =
+                LinkedHashMap(super.fieldDefinitions)
             result[FIELD_AUTOMATION_ONLY] = automationOnlyField
             return result
         }
@@ -47,27 +46,30 @@ class SceneConfigurable(
         return SceneAutomationUnit(eventBus, instance, name, automationOnly, states)
     }
 
-    private val automationOnlyField = BooleanField(FIELD_AUTOMATION_ONLY, R.field_automation_only_hint, false)
-
+    private val automationOnlyField =
+        BooleanField(FIELD_AUTOMATION_ONLY, R.field_automation_only_hint, false)
 
     override val states: Map<String, State>
         get() {
             val states: MutableMap<String, State> = HashMap()
-            states[STATE_UNKNOWN] = State.buildReadOnlyState(
-                STATE_UNKNOWN,
-                R.state_unknown,
-            )
-            states[STATE_ACTIVE] = State.buildControlState(
-                STATE_ACTIVE,
-                R.state_active,
-                R.action_activate,
-                isSignaled = true
-            )
-            states[STATE_INACTIVE] = State.buildControlState(
-                STATE_INACTIVE,
-                R.state_inactive,
-                R.action_deactivate,
-            )
+            states[STATE_INIT] =
+                State.buildReadOnlyState(
+                    STATE_INIT,
+                    R.state_unknown,
+                )
+            states[STATE_ACTIVE] =
+                State.buildControlState(
+                    STATE_ACTIVE,
+                    R.state_active,
+                    R.action_activate,
+                    isSignaled = true
+                )
+            states[STATE_INACTIVE] =
+                State.buildControlState(
+                    STATE_INACTIVE,
+                    R.state_inactive,
+                    R.action_deactivate,
+                )
             return states
         }
 
@@ -84,7 +86,8 @@ class SceneConfigurable(
         get() = R.configurable_scene_description
 
     override val iconRaw: String
-        get() = """<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+        get() =
+            """<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                      <g class="layer">
                       <title>Created by hafiudin</title>
                       <g id="svg_1" transform="translate(0,-952.36218)">
